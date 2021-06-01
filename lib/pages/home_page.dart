@@ -1,11 +1,10 @@
 import 'dart:convert';
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:kitprod/drawer.dart';
 import 'package:http/http.dart' as http;
 
 class HomePage extends StatefulWidget {
+  static const String routeName = "/home";
   @override
   _HomePageState createState() => _HomePageState();
 }
@@ -26,6 +25,7 @@ class _HomePageState extends State<HomePage> {
   fetchData() async {
     var res = await http.get(Uri.parse(url));
     data = jsonDecode(res.body);
+    setState(() {});
     print(data);
   }
 
@@ -40,6 +40,14 @@ class _HomePageState extends State<HomePage> {
       backgroundColor: Colors.grey[200],
       appBar: AppBar(
         title: Text("Bienvenue"),
+        actions: [
+          IconButton(
+            icon: Icon(Icons.exit_to_app),
+            onPressed: () {
+              Navigator.pop(context);
+            },
+          ),
+        ],
       ),
       body: data != null
           ? ListView.builder(
