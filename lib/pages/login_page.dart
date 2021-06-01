@@ -22,7 +22,7 @@ class _LoginPageState extends State<LoginPage> {
       child: Column(
         children: <Widget>[
           Image.asset(
-            "assets/backg.jpg",
+            "assets/back.jpg",
             fit: BoxFit.cover,
             // color: Colors.grey.withOpacity(0.7),
             // colorBlendMode: BlendMode.darken,
