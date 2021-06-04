@@ -11,7 +11,7 @@ class EmployeePage extends StatefulWidget {
 }
 
 class _EmployeePageState extends State<EmployeePage> {
-  var url = 'https://dddc8cea5e92.ngrok.io/employees?idExploitation=3';
+  var url = 'https://34456f88d6c5.ngrok.io/employees?idExploitation=3';
 
   var data;
 
@@ -25,7 +25,7 @@ class _EmployeePageState extends State<EmployeePage> {
     var res = await http.get(Uri.parse(url));
     data = jsonDecode(res.body);
     setState(() {});
-    print(data);
+    //print(data);
   }
 
   @override
