@@ -31,6 +31,7 @@ dependencies:
 
 dev_dependencies:
   http: ^0.13.3
+  # datetime_picker_formfield: ^2.0.0
   flutter_test:
     sdk: flutter
 
@@ -49,6 +50,7 @@ flutter:
     - assets/image1.jpg
     - assets/background.jpg
     - assets/back.jpg
+    - assets/team.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
