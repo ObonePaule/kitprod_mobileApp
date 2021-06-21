@@ -12,6 +12,8 @@ import 'package:kitprod/pages/charge/charge-list.dart';
 // import 'package:kitprod/pages/charge/charge-list.dart';
 import 'package:kitprod/pages/employee/employee-form.dart';
 import 'package:kitprod/pages/employee/employee-list.dart';
+import 'package:kitprod/pages/fixedtask/fixedtask-form.dart';
+import 'package:kitprod/pages/fixedtask/fixedtask-list.dart';
 import 'package:kitprod/pages/home.dart';
 import 'package:kitprod/pages/lot/lot-form.dart';
 import 'package:kitprod/pages/lot/lot-list.dart';
@@ -41,7 +43,9 @@ class MyApp extends StatelessWidget {
         LotListPage.routeName: (context) => LotListPage(),
         LotSheetFormPage.routeName: (context) => LotSheetFormPage(),
         ChargeFormPage.routeName: (context) => ChargeFormPage(),
-        ChargeListPage.routeName: (context) => ChargeListPage()
+        ChargeListPage.routeName: (context) => ChargeListPage(),
+        FixedTaskFormPage.routeName: (context) => FixedTaskFormPage(),
+        FixedTaskListPage.routeName: (context) => FixedTaskListPage(),
       },
     );
   }

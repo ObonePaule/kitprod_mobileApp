@@ -24,3 +24,10 @@ var chargeAnnuiteFafController = TextEditingController();
 var chargeAnnuiteBatimentController = TextEditingController();
 var chargeEntretienCourantController = TextEditingController();
 var chargeAutreController = TextEditingController();
+
+var fixedNettoyageDesinfectionController = TextEditingController();
+var fixedPreparationController = TextEditingController();
+var fixedMepLotController = TextEditingController();
+var fixedTempsEnlevementController = TextEditingController();
+var fixedTacheAdminController = TextEditingController();
+var fixedAutreController = TextEditingController();
