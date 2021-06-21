@@ -14,6 +14,8 @@ import 'package:kitprod/pages/employee/employee-form.dart';
 import 'package:kitprod/pages/employee/employee-list.dart';
 import 'package:kitprod/pages/fixedtask/fixedtask-form.dart';
 import 'package:kitprod/pages/fixedtask/fixedtask-list.dart';
+import 'package:kitprod/pages/food/food-form.dart';
+import 'package:kitprod/pages/food/food-list.dart';
 import 'package:kitprod/pages/home.dart';
 import 'package:kitprod/pages/lot/lot-form.dart';
 import 'package:kitprod/pages/lot/lot-list.dart';
@@ -46,6 +48,8 @@ class MyApp extends StatelessWidget {
         ChargeListPage.routeName: (context) => ChargeListPage(),
         FixedTaskFormPage.routeName: (context) => FixedTaskFormPage(),
         FixedTaskListPage.routeName: (context) => FixedTaskListPage(),
+        FoodFormPage.routeName: (context) => FoodFormPage(),
+        FoodListPage.routeName: (context) => FoodListPage()
       },
     );
   }

@@ -31,3 +31,5 @@ var fixedMepLotController = TextEditingController();
 var fixedTempsEnlevementController = TextEditingController();
 var fixedTacheAdminController = TextEditingController();
 var fixedAutreController = TextEditingController();
+
+var foodNameController = TextEditingController();
