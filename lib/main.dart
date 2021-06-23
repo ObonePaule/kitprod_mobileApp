@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:kitprod/components/menu-exploitation.dart';
+//import 'package:kitprod/components/menu-exploitation.dart';
 //import 'package:kitprod/components/menu-exploitation.dart';
 import 'package:kitprod/pages/auth/signin.dart';
 import 'package:kitprod/pages/building/building-form.dart';
@@ -20,6 +20,8 @@ import 'package:kitprod/pages/home.dart';
 import 'package:kitprod/pages/lot/lot-form.dart';
 import 'package:kitprod/pages/lot/lot-list.dart';
 import 'package:kitprod/pages/lotSheet/lotsheet-form.dart';
+import 'package:kitprod/pages/rawmaterial/rawmaterial-form.dart';
+import 'package:kitprod/pages/rawmaterial/rawmaterial-list.dart';
 
 void main() {
   runApp(MyApp());
@@ -30,7 +32,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: MenuExploitationPage(),
+      home: RawMaterialListPage(),
       theme: ThemeData(
         primarySwatch: Colors.purple,
       ),
@@ -49,7 +51,9 @@ class MyApp extends StatelessWidget {
         FixedTaskFormPage.routeName: (context) => FixedTaskFormPage(),
         FixedTaskListPage.routeName: (context) => FixedTaskListPage(),
         FoodFormPage.routeName: (context) => FoodFormPage(),
-        FoodListPage.routeName: (context) => FoodListPage()
+        FoodListPage.routeName: (context) => FoodListPage(),
+        RawMaterialFormPage.routeName: (context) => RawMaterialFormPage(),
+        RawMaterialListPage.routeName: (context) => RawMaterialListPage()
       },
     );
   }

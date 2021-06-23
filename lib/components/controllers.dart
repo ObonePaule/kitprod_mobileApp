@@ -33,3 +33,7 @@ var fixedTacheAdminController = TextEditingController();
 var fixedAutreController = TextEditingController();
 
 var foodNameController = TextEditingController();
+
+var rawNameController = TextEditingController();
+var rawProportionController = TextEditingController();
+var rawMpPriceController = TextEditingController();
