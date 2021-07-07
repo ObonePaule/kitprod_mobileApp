@@ -1,11 +1,14 @@
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
+import 'package:kitprod/components/shared-preferences.dart';
 import 'dart:convert';
 import 'package:kitprod/models/lot.dart';
 
-final String host = 'c5e60931c6cf.ngrok.io';
+final String host = dotenv.env['API_URL']!;
 final String path = '/lots';
 
-Future<List<Lot>> getLotList(double idExploitation, double idBuilding) async {
+Future<List<Lot>> getLotList(String idBuilding) async {
+  String idExploitation = await getCurrentExploitationId();
   var params = {
     'idExploitation': idExploitation.toString(),
     'idBuilding': idBuilding.toString()
@@ -18,12 +21,9 @@ Future<List<Lot>> getLotList(double idExploitation, double idBuilding) async {
   return lots;
 }
 
-Future<Lot?> insertLot(
-    double idExploitation, double idBuilding, String body) async {
-  var params = {
-    'idExploitation': idExploitation.toString(),
-    'idBuilding': idBuilding.toString()
-  };
+Future<Lot?> insertLot(String idBuilding, String body) async {
+  String idExploitation = await getCurrentExploitationId();
+  var params = {'idExploitation': idExploitation, 'idBuilding': idBuilding};
   var response = await http.post(Uri.https(host, path, params),
       body: body,
       headers: {

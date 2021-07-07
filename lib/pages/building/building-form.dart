@@ -6,9 +6,14 @@ import 'package:kitprod/components/controllers.dart';
 import 'package:kitprod/models/building.dart';
 import 'package:kitprod/services/building-service.dart';
 
-class BuildingFormPage extends StatelessWidget {
+class BuildingFormPage extends StatefulWidget {
   static const String routeName = "/buildingform";
 
+  @override
+  _BuildingFormPageState createState() => _BuildingFormPageState();
+}
+
+class _BuildingFormPageState extends State<BuildingFormPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -68,7 +73,7 @@ class BuildingFormPage extends StatelessWidget {
     );
   }
 
-  createBuilding(context) async {
+  Future createBuilding(context) async {
     Building? obj = Building(
         name: buildingNameController.text.trim(),
         space: int.tryParse(buildingSpaceController.text.trim()),
@@ -76,9 +81,8 @@ class BuildingFormPage extends StatelessWidget {
         lots: null);
     var body = jsonEncode(obj.toJson());
 
-    var obj2 = await insertBuilding(4.0, body);
-    //print(obj2);
-    if (obj2 != 0) {
+    var obj2 = await insertBuilding(body);
+    if (obj2 != null) {
       Navigator.pop(context);
     }
   }

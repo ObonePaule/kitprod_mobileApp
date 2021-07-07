@@ -2,14 +2,26 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:kitprod/components/controllers.dart';
+import 'package:kitprod/models/food.dart';
 import 'package:kitprod/models/rawMaterial.dart';
 import 'package:kitprod/services/rawmaterial-service.dart';
 
-class RawMaterialFormPage extends StatelessWidget {
+class RawMaterialFormPage extends StatefulWidget {
   static const String routeName = "/rawmaterialform";
 
   @override
+  _RawMaterialFormPageState createState() => _RawMaterialFormPageState();
+}
+
+class _RawMaterialFormPageState extends State<RawMaterialFormPage> {
+  late Food food;
+
+  @override
   Widget build(BuildContext context) {
+    final args = ModalRoute.of(context)!.settings.arguments as Food;
+    setState(() {
+      food = args;
+    });
     return Scaffold(
       appBar: AppBar(
         title: Text("Ajouter une matière matière"),
@@ -74,7 +86,7 @@ class RawMaterialFormPage extends StatelessWidget {
 
     var body = jsonEncode(obj.toJson());
 
-    var obj2 = await insertRawMaterial(4.0, 4.0, body);
+    var obj2 = await insertRawMaterial(food.id!, body);
     print(obj2);
     Navigator.pop(context);
   }

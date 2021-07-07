@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:kitprod/models/building.dart';
 import 'package:kitprod/pages/building/building-form.dart';
+import 'package:kitprod/pages/lot/lot-list.dart';
 import 'package:kitprod/services/building-service.dart';
 
 class BuildingListPage extends StatefulWidget {
@@ -34,7 +35,7 @@ class _BuildingListPageState extends State<BuildingListPage> {
 
   Widget renderBuildingBody() {
     return FutureBuilder<List<Building>>(
-      future: getBuildingList(4.0),
+      future: getBuildingList(),
       builder: (context, snapshot) {
         if (snapshot.hasData) {
           return renderBuildingList(snapshot);
@@ -60,7 +61,15 @@ class _BuildingListPageState extends State<BuildingListPage> {
   ListView renderBuildingList(AsyncSnapshot<List<Building>> snapshot) {
     return ListView.builder(
       itemBuilder: (context, index) {
-        return Card(child: ListTile(title: Text(snapshot.data![index].name)));
+        return GestureDetector(
+            child:
+                Card(child: ListTile(title: Text(snapshot.data![index].name!))),
+            onTap: () {
+              Navigator.pushNamed(context, LotListPage.routeName,
+                  arguments: Building(
+                      name: snapshot.data![index].name,
+                      id: snapshot.data![index].id));
+            });
       },
       itemCount: snapshot.data!.length,
     );

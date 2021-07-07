@@ -1,13 +1,16 @@
 import 'dart:convert';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
+import 'package:kitprod/components/shared-preferences.dart';
 import 'package:kitprod/models/building.dart';
 
-final String host = '92acb6e9061e.ngrok.io';
+final String host = dotenv.env['API_URL']!;
 final String path = '/buildings';
 
-Future<List<Building>> getBuildingList(double idExploitation) async {
+Future<List<Building>> getBuildingList() async {
+  String idExploitation = await getCurrentExploitationId();
   var params = {
-    'idExploitation': idExploitation.toString(),
+    'idExploitation': idExploitation,
   };
   var response = await http.get(Uri.https(host, path, params));
   Iterable buildingsJson = jsonDecode(response.body);
@@ -17,7 +20,8 @@ Future<List<Building>> getBuildingList(double idExploitation) async {
   return buildings;
 }
 
-Future<int> insertBuilding(double idExploitation, String body) async {
+Future<Building?> insertBuilding(String body) async {
+  String idExploitation = await getCurrentExploitationId();
   var params = {
     'idExploitation': idExploitation.toString(),
   };
@@ -27,10 +31,9 @@ Future<int> insertBuilding(double idExploitation, String body) async {
         'Content-Type': 'application/json',
         'Accept': 'application/json'
       });
-  //print(Building.fromJson(json.decode(response.body)));
   if (response.statusCode == 200) {
-    return response.statusCode;
+    return Building.fromJson(json.decode(response.body));
   } else {
-    return 0;
+    return null;
   }
 }

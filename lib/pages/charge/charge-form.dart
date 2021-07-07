@@ -87,56 +87,8 @@ class _ChargeFormPageState extends State<ChargeFormPage> {
                   height: 400,
                 ),
                 ElevatedButton(
-                  onPressed: () async {
-                    Charge? assurance = Charge(
-                        chargeType: "ASSURANCE",
-                        value: double.tryParse(
-                            chargeAssuranceController.text.trim()));
-                    Charge? mecanisation = Charge(
-                        chargeType: "MECANISATION",
-                        value: double.tryParse(
-                            chargeMecanisationController.text.trim()));
-                    Charge? fraisDeGestion = Charge(
-                        chargeType: "FRAIS_DE_GESTION",
-                        value: double.tryParse(
-                            chargeMecanisationController.text.trim()));
-                    Charge? annuiteEquipement = Charge(
-                        chargeType: "ANNUITE_EQUIPEMENTS_AVICOLES",
-                        value: double.tryParse(
-                            chargeAnnuiteEquipementController.text.trim()));
-                    Charge? annuiteBatiment = Charge(
-                        chargeType: "ANNUITE_BATIMENT",
-                        value: double.tryParse(
-                            chargeAnnuiteBatimentController.text.trim()));
-                    Charge? annuiteFaf = Charge(
-                        chargeType: "ANNUITE_FAF",
-                        value: double.tryParse(
-                            chargeAnnuiteFafController.text.trim()));
-                    Charge? entretienCourant = Charge(
-                        chargeType: "ENTRETIEN_COURANT_PETIT_MATERIEL",
-                        value: double.tryParse(
-                            chargeEntretienCourantController.text.trim()));
-                    Charge? autre = Charge(
-                        chargeType: "AUTRE",
-                        value:
-                            double.tryParse(chargeAutreController.text.trim()));
-                    charges.addAll([
-                      assurance,
-                      mecanisation,
-                      fraisDeGestion,
-                      annuiteEquipement,
-                      annuiteBatiment,
-                      annuiteFaf,
-                      entretienCourant,
-                      autre
-                    ]);
-                    var body = jsonEncode(charges);
-
-                    print(body);
-                    var insertedCharges = await insertCharges(4.0, body);
-                    if (insertedCharges != null) {
-                      Navigator.pop(context);
-                    }
+                  onPressed: () {
+                    createCharges(context);
                   },
                   child: Text("Enregistrer"),
                   style: ElevatedButton.styleFrom(
@@ -152,5 +104,47 @@ class _ChargeFormPageState extends State<ChargeFormPage> {
         ),
       ),
     );
+  }
+
+  createCharges(context) async {
+    Charge? assurance = Charge(
+        chargeType: "ASSURANCE",
+        value: double.tryParse(chargeAssuranceController.text.trim()));
+    Charge? mecanisation = Charge(
+        chargeType: "MECANISATION",
+        value: double.tryParse(chargeMecanisationController.text.trim()));
+    Charge? fraisDeGestion = Charge(
+        chargeType: "FRAIS_DE_GESTION",
+        value: double.tryParse(chargeMecanisationController.text.trim()));
+    Charge? annuiteEquipement = Charge(
+        chargeType: "ANNUITE_EQUIPEMENTS_AVICOLES",
+        value: double.tryParse(chargeAnnuiteEquipementController.text.trim()));
+    Charge? annuiteBatiment = Charge(
+        chargeType: "ANNUITE_BATIMENT",
+        value: double.tryParse(chargeAnnuiteBatimentController.text.trim()));
+    Charge? annuiteFaf = Charge(
+        chargeType: "ANNUITE_FAF",
+        value: double.tryParse(chargeAnnuiteFafController.text.trim()));
+    Charge? entretienCourant = Charge(
+        chargeType: "ENTRETIEN_COURANT_PETIT_MATERIEL",
+        value: double.tryParse(chargeEntretienCourantController.text.trim()));
+    Charge? autre = Charge(
+        chargeType: "AUTRE",
+        value: double.tryParse(chargeAutreController.text.trim()));
+    charges.addAll([
+      assurance,
+      mecanisation,
+      fraisDeGestion,
+      annuiteEquipement,
+      annuiteBatiment,
+      annuiteFaf,
+      entretienCourant,
+      autre
+    ]);
+    var body = jsonEncode(charges);
+    var insertedCharges = await insertCharges(body);
+    if (insertedCharges != null) {
+      Navigator.pop(context);
+    }
   }
 }

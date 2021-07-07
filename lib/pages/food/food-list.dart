@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:kitprod/models/food.dart';
 import 'package:kitprod/pages/food/food-form.dart';
+import 'package:kitprod/pages/rawmaterial/rawmaterial-list.dart';
 import 'package:kitprod/services/food-service.dart';
 
 class FoodListPage extends StatefulWidget {
@@ -34,7 +35,7 @@ class _FoodListPageState extends State<FoodListPage> {
 
   Widget renderFoodBody() {
     return FutureBuilder<List<Food>>(
-      future: getFoodList(4.0),
+      future: getFoodList(),
       builder: (context, snapshot) {
         if (snapshot.hasData) {
           return renderFoodList(snapshot);
@@ -60,7 +61,15 @@ class _FoodListPageState extends State<FoodListPage> {
   ListView renderFoodList(AsyncSnapshot<List<Food>> snapshot) {
     return ListView.builder(
       itemBuilder: (context, index) {
-        return Card(child: ListTile(title: Text(snapshot.data![index].name)));
+        return GestureDetector(
+            child:
+                Card(child: ListTile(title: Text(snapshot.data![index].name))),
+            onTap: () {
+              Navigator.pushNamed(context, RawMaterialListPage.routeName,
+                  arguments: Food(
+                      name: snapshot.data![index].name,
+                      id: snapshot.data![index].id));
+            });
       },
       itemCount: snapshot.data!.length,
     );

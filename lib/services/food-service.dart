@@ -1,11 +1,14 @@
 import 'dart:convert';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
+import 'package:kitprod/components/shared-preferences.dart';
 import 'package:kitprod/models/food.dart';
 
-final String host = 'b72b29b92f09.ngrok.io';
+final String host = dotenv.env['API_URL']!;
 final String path = '/foods';
 
-Future<List<Food>> getFoodList(double idExploitation) async {
+Future<List<Food>> getFoodList() async {
+  String idExploitation = await getCurrentExploitationId();
   var params = {
     'idExploitation': idExploitation.toString(),
   };
@@ -17,9 +20,10 @@ Future<List<Food>> getFoodList(double idExploitation) async {
   return foods;
 }
 
-Future<int> insertFood(double idExploitation, String body) async {
+Future<int> insertFood(String body) async {
+  String idExploitation = await getCurrentExploitationId();
   var params = {
-    'idExploitation': idExploitation.toString(),
+    'idExploitation': idExploitation,
   };
   var response = await http.post(Uri.https(host, path, params),
       body: body,

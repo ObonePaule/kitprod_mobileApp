@@ -6,18 +6,20 @@ String lotToJson(Lot data) => json.encode(data.toJson());
 
 class Lot {
   Lot(
-      {required this.name,
-      required this.species,
-      required this.mepAge,
-      required this.costByAnimal,
-      required this.number,
-      required this.costOfLitter,
-      required this.lotSheet
+      {this.id,
+      this.name,
+      this.species,
+      this.mepAge,
+      this.costByAnimal,
+      this.number,
+      this.costOfLitter,
+      this.lotSheet
       //required this.isArchived,
       });
 
-  String name;
-  String species;
+  String? id;
+  String? name;
+  String? species;
   int? mepAge;
   double? costByAnimal;
   int? number;
@@ -26,6 +28,7 @@ class Lot {
   //bool isArchived;
 
   factory Lot.fromJson(Map<String, dynamic> json) => Lot(
+      id: json["id"],
       name: json["name"],
       species: json["species"],
       mepAge: json["mepAge"],

@@ -2,25 +2,26 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
 import 'package:kitprod/components/shared-preferences.dart';
 import 'dart:convert';
-import 'package:kitprod/models/employee.dart';
+
+import 'package:kitprod/models/fixedTask.dart';
 
 final String host = dotenv.env['API_URL']!;
-final String path = '/employees';
+final String path = '/fixedtasks';
 
-Future<List<Employee>> getEmployeeList() async {
+Future<List<FixedTask>> getTasks() async {
   String idExploitation = await getCurrentExploitationId();
   var params = {
     'idExploitation': idExploitation.toString(),
   };
   var response = await http.get(Uri.https(host, path, params));
-  Iterable employeesJson = jsonDecode(response.body);
-  List<Employee> employees = List<Employee>.from(
-      employeesJson.map((modelAsJson) => Employee.fromJson(modelAsJson)));
+  Iterable tasksJson = jsonDecode(response.body);
+  List<FixedTask> tasks = List<FixedTask>.from(
+      tasksJson.map((modelAsJson) => FixedTask.fromJson(modelAsJson)));
 
-  return employees;
+  return tasks;
 }
 
-Future<Employee?> insertEmployeeTmp(String body) async {
+Future insertTask(String body) async {
   String idExploitation = await getCurrentExploitationId();
   var params = {
     'idExploitation': idExploitation.toString(),
@@ -33,7 +34,7 @@ Future<Employee?> insertEmployeeTmp(String body) async {
       });
 
   if (response.statusCode == 200) {
-    return Employee.fromJson(json.decode(response.body));
+    return FixedTask.fromJson(json.decode(response.body));
   } else {
     return null;
   }

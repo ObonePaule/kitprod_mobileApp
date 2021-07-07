@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:kitprod/models/building.dart';
 import 'package:kitprod/models/lot.dart';
 import 'package:kitprod/pages/lot/lot-form.dart';
 import 'package:kitprod/services/lot-service.dart';
@@ -11,6 +12,8 @@ class LotListPage extends StatefulWidget {
 }
 
 class _LotListPageState extends State<LotListPage> {
+  late Building building;
+
   @override
   void initState() {
     super.initState();
@@ -23,6 +26,10 @@ class _LotListPageState extends State<LotListPage> {
 
   @override
   Widget build(BuildContext context) {
+    final args = ModalRoute.of(context)!.settings.arguments as Building;
+    setState(() {
+      building = args;
+    });
     return Scaffold(
       appBar: AppBar(
         title: Text("Lot en cours"),
@@ -34,7 +41,7 @@ class _LotListPageState extends State<LotListPage> {
 
   Widget renderLotsBody() {
     return FutureBuilder<List<Lot>>(
-      future: getLotList(3.0, 4.0),
+      future: getLotList(building.id!),
       builder: (context, snapshot) {
         if (snapshot.hasData) {
           return renderLotsList(snapshot);
@@ -61,7 +68,14 @@ class _LotListPageState extends State<LotListPage> {
   ListView renderLotsList(AsyncSnapshot<List<Lot>> snapshot) {
     return ListView.builder(
       itemBuilder: (context, index) {
-        return Card(child: ListTile(title: Text(snapshot.data![index].name)));
+        return GestureDetector(
+          child:
+              Card(child: ListTile(title: Text(snapshot.data![index].name!))),
+          onTap: () {
+            // Navigator.pushNamed(context, LotSheetListPage.routeName,
+            //     arguments: LotSheet(id: snapshot.data![index].id));
+          },
+        );
       },
       itemCount: snapshot.data!.length,
     );

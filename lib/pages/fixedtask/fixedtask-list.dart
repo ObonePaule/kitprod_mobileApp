@@ -27,7 +27,7 @@ class _FixedTaskListPageState extends State<FixedTaskListPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Charges"),
+        title: Text("Temps de travail"),
       ),
       body: Card(child: renderTasksBody()),
       floatingActionButton: renderFloatingButton(context),
@@ -46,7 +46,7 @@ class _FixedTaskListPageState extends State<FixedTaskListPage> {
 
   Widget renderTasksBody() {
     return FutureBuilder<List<FixedTask>>(
-      future: getTasks(4.0),
+      future: getTasks(),
       builder: (context, snapshot) {
         if (snapshot.hasData) {
           return renderTasksList(snapshot);

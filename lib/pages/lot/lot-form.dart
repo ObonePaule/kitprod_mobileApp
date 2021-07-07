@@ -2,14 +2,26 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:kitprod/components/controllers.dart';
+import 'package:kitprod/models/building.dart';
 import 'package:kitprod/models/lot.dart';
 import 'package:kitprod/services/lot-service.dart';
 
-class LotFormPage extends StatelessWidget {
+class LotFormPage extends StatefulWidget {
   static const String routeName = "/lotform";
 
   @override
+  _LotFormPageState createState() => _LotFormPageState();
+}
+
+class _LotFormPageState extends State<LotFormPage> {
+  late Building building;
+
+  @override
   Widget build(BuildContext context) {
+    final args = ModalRoute.of(context)!.settings.arguments as Building;
+    setState(() {
+      building = args;
+    });
     return Scaffold(
       appBar: AppBar(
         title: Text("Créer un lot"),
@@ -104,7 +116,7 @@ class LotFormPage extends StatelessWidget {
 
     var body = jsonEncode(obj.toJson());
 
-    var obj2 = await insertLot(3.0, 4.0, body);
+    var obj2 = await insertLot(building.id!, body);
     print(obj2);
     Navigator.pop(context);
   }

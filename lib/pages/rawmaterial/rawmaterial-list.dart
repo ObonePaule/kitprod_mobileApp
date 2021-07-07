@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:kitprod/models/food.dart';
 import 'package:kitprod/models/rawMaterial.dart';
 import 'package:kitprod/pages/rawmaterial/rawmaterial-form.dart';
 import 'package:kitprod/services/rawmaterial-service.dart';
@@ -11,6 +12,8 @@ class RawMaterialListPage extends StatefulWidget {
 }
 
 class _RawMaterialListPageState extends State<RawMaterialListPage> {
+  late Food food;
+
   @override
   void initState() {
     super.initState();
@@ -23,6 +26,10 @@ class _RawMaterialListPageState extends State<RawMaterialListPage> {
 
   @override
   Widget build(BuildContext context) {
+    final args = ModalRoute.of(context)!.settings.arguments as Food;
+    setState(() {
+      food = args;
+    });
     return Scaffold(
       appBar: AppBar(
         title: Text("Ajouter une matière première"),
@@ -34,7 +41,7 @@ class _RawMaterialListPageState extends State<RawMaterialListPage> {
 
   Widget renderRawMaterialsBody() {
     return FutureBuilder<List<RawMaterial>>(
-      future: getRawMaterialList(4.0, 4.0),
+      future: getRawMaterialList(food.id!),
       builder: (context, snapshot) {
         if (snapshot.hasData) {
           return renderRawMaterialList(snapshot);
@@ -51,7 +58,8 @@ class _RawMaterialListPageState extends State<RawMaterialListPage> {
   FloatingActionButton renderFloatingActionButton(BuildContext context) {
     return FloatingActionButton(
       onPressed: () {
-        Navigator.pushNamed(context, RawMaterialFormPage.routeName)
+        Navigator.pushNamed(context, RawMaterialFormPage.routeName,
+                arguments: food)
             .then((value) => setState(() {}));
       },
       child: const Icon(Icons.add),
@@ -61,10 +69,7 @@ class _RawMaterialListPageState extends State<RawMaterialListPage> {
   ListView renderRawMaterialList(AsyncSnapshot<List<RawMaterial>> snapshot) {
     return ListView.builder(
       itemBuilder: (context, index) {
-        return GestureDetector(
-          child: Card(child: ListTile(title: Text(snapshot.data![index].name))),
-          onTap: () {},
-        );
+        return Card(child: ListTile(title: Text(snapshot.data![index].name)));
       },
       itemCount: snapshot.data!.length,
     );

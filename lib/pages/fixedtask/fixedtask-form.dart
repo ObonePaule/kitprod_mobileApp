@@ -130,9 +130,7 @@ class _FixedTaskFormPageState extends State<FixedTaskFormPage> {
       other
     ]);
     var body = jsonEncode(fixedTasks);
-
-    print(body);
-    var insertedTask = await insertTask(4.0, body);
+    var insertedTask = await insertTask(body);
     if (insertedTask != null) {
       Navigator.pop(context);
     }

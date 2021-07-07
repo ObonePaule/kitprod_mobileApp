@@ -1,9 +1,11 @@
 import 'dart:convert';
+import 'package:json_annotation/json_annotation.dart';
 
 Employee employeeFromJson(String str) => Employee.fromJson(json.decode(str));
 
 String employeeToJson(Employee data) => json.encode(data.toJson());
 
+@JsonSerializable()
 class Employee {
   Employee({
     this.id,

@@ -33,7 +33,7 @@ class _EmployeeListPageState extends State<EmployeeListPage> {
 
   Widget renderEmployeesBody() {
     return FutureBuilder<List<Employee>>(
-      future: getEmployeeList(4.0),
+      future: getEmployeeList(),
       builder: (context, snapshot) {
         if (snapshot.hasData) {
           return renderEmployeesList(snapshot);

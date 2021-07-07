@@ -10,18 +10,21 @@ String buildingToJson(Building data) => json.encode(data.toJson());
 
 class Building {
   Building({
-    required this.name,
+    this.id,
+    this.name,
     this.space,
     this.numberOfLots,
     this.lots,
   });
 
-  String name;
+  String? id;
+  String? name;
   int? space;
   int? numberOfLots;
   List? lots;
 
   factory Building.fromJson(Map<String, dynamic> json) => Building(
+      id: json["id"],
       name: json["name"],
       space: json["space"],
       numberOfLots: json["numberOfLots"],

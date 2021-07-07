@@ -1,15 +1,20 @@
-import 'package:http/http.dart' as http;
-import 'package:kitprod/models/charge.dart';
 import 'dart:convert';
 
-final String host = '4432a3b40da2.ngrok.io';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:http/http.dart' as http;
+import 'package:kitprod/components/shared-preferences.dart';
+import 'package:kitprod/models/charge.dart';
+
+final String host = dotenv.env['API_URL']!;
 final String path = '/charges';
 
-Future<List<Charge>> getCharges(double idExploitation) async {
+Future<List<Charge>> getCharges() async {
+  String idExploitation = await getCurrentExploitationId();
   var params = {
-    'idExploitation': idExploitation.toString(),
+    'idExploitation': idExploitation,
   };
   var response = await http.get(Uri.https(host, path, params));
+  print(response.body);
   Iterable chargesJson = jsonDecode(response.body);
   List<Charge> charges = List<Charge>.from(
       chargesJson.map((modelAsJson) => Charge.fromJson(modelAsJson)));
@@ -17,9 +22,10 @@ Future<List<Charge>> getCharges(double idExploitation) async {
   return charges;
 }
 
-Future insertCharges(double idExploitation, String body) async {
+Future insertCharges(String body) async {
+  String idExploitation = await getCurrentExploitationId();
   var params = {
-    'idExploitation': idExploitation.toString(),
+    'idExploitation': idExploitation,
   };
   var response = await http.post(Uri.https(host, path, params),
       body: body,

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:kitprod/components/elevated-button-save.dart';
+//import 'package:kitprod/components/elevated-button-save.dart';
 
 class LotSheetFormPage extends StatelessWidget {
   static const String routeName = "/lotsheetform";
@@ -102,7 +102,7 @@ class LotSheetFormPage extends StatelessWidget {
                 SizedBox(
                   height: 400,
                 ),
-                ElevatedButtonSave(),
+                //ElevatedButtonSave(),
               ],
             ),
           ),

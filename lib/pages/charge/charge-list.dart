@@ -44,7 +44,7 @@ class _ChargeListPageState extends State<ChargeListPage> {
 
   Widget renderChargesBody() {
     return FutureBuilder<List<Charge>>(
-      future: getCharges(4.0),
+      future: getCharges(),
       builder: (context, snapshot) {
         if (snapshot.hasData) {
           return renderChargesList(snapshot);
@@ -66,11 +66,5 @@ class _ChargeListPageState extends State<ChargeListPage> {
       },
       itemCount: snapshot.data!.length,
     );
-    // ListView.builder(
-    //   itemBuilder: (context, index) {
-    //     return Card(child: ListTile(title: Text(snapshot.data![index].name)));
-    //   },
-    //   itemCount: snapshot.data!.length,
-    // );
   }
 }

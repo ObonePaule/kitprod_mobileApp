@@ -1,5 +1,11 @@
 import 'package:flutter/widgets.dart';
 
+final usernameController = TextEditingController();
+final passwordController = TextEditingController();
+
+var exploitationNameController = TextEditingController();
+var exploitationNumberOfPoultry = TextEditingController();
+
 var employeeNameController = TextEditingController();
 var employeeNumberController = TextEditingController();
 var employeeCostController = TextEditingController();
