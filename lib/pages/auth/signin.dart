@@ -1,8 +1,6 @@
-import 'package:firebase_auth/firebase_auth.dart';
-//import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:kitprod/components/constants.dart';
-import 'package:kitprod/components/menu.dart';
+import 'package:kitprod/pages/auth/authentication.dart';
 import 'package:kitprod/pages/auth/signup.dart';
 
 class SigninPage extends StatefulWidget {
@@ -16,7 +14,7 @@ class SigninPageState extends State<SigninPage> {
   final _usernameController = TextEditingController();
   final _passwordController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
-  final _auth = FirebaseAuth.instance;
+  final AuthenticationService _auth = AuthenticationService();
   String error = '';
 
   @override
@@ -89,17 +87,13 @@ class SigninPageState extends State<SigninPage> {
                             var email = _usernameController.value.text;
                             var password = _passwordController.value.text;
                             //Firebase auth
-                            dynamic result =
-                                await _auth.signInWithEmailAndPassword(
-                                    email: email, password: password);
+                            dynamic result = await _auth
+                                .signInWithEmailAndPassword(email, password);
                             if (result == null) {
                               setState(() {
                                 error = 'Entrez une adresse mail valide';
                               });
                             }
-                            Navigator.of(context).pushReplacement(
-                                MaterialPageRoute(
-                                    builder: (context) => MenuPage()));
                           }
                         },
                         child: Text("Connexion"),

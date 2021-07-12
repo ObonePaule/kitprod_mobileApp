@@ -1,6 +1,5 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:kitprod/pages/home.dart';
+import 'package:kitprod/pages/auth/authentication.dart';
 
 class SignupPage extends StatefulWidget {
   static const String routeName = "signup";
@@ -14,7 +13,7 @@ class _SignupPageState extends State<SignupPage> {
   final _usernameController = TextEditingController();
   final _passwordController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
-  final _auth = FirebaseAuth.instance;
+  final AuthenticationService _auth = AuthenticationService();
   String error = '';
 
   @override
@@ -99,21 +98,20 @@ class _SignupPageState extends State<SignupPage> {
                         ElevatedButton(
                           onPressed: () async {
                             if (_formKey.currentState!.validate()) {
+                              var name = _nameController.value.text;
                               var email = _usernameController.value.text;
                               var password = _passwordController.value.text;
 
                               //Firebase auth
                               dynamic result =
-                                  await _auth.createUserWithEmailAndPassword(
-                                      email: email, password: password);
+                                  await _auth.registerWithEmailAndPassword(
+                                      name, email, password);
                               if (result == null) {
                                 setState(() {
                                   error = 'Entrez une adresse mail valide';
                                 });
                               }
                             }
-
-                            Navigator.pushNamed(context, HomePage.routeName);
                           },
                           child: Text("Inscription"),
                           style: ElevatedButton.styleFrom(
