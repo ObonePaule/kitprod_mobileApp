@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:ionicons/ionicons.dart';
 import 'package:kitprod/components/constants.dart';
+import 'package:kitprod/components/text-input-field.dart';
 import 'package:kitprod/pages/auth/authentication.dart';
 import 'package:kitprod/pages/auth/signup.dart';
+import 'package:kitprod/utils/color.dart';
 
 class SigninPage extends StatefulWidget {
   static const String routeName = " Signin";
@@ -26,112 +30,69 @@ class SigninPageState extends State<SigninPage> {
 
   @override
   Widget build(BuildContext context) {
+    // Pour mettre la page en plein écran
+    SystemChrome.setEnabledSystemUIOverlays([]);
+
     return Scaffold(
-        body: SingleChildScrollView(
-      child: Column(
-        children: <Widget>[
-          // Image.asset(
-          //   "assets/back.jpg",
-          //   fit: BoxFit.cover,
-          //   color: Colors.grey.withOpacity(0.7),
-          //   colorBlendMode: BlendMode.darken,
-          // ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Card(
-              child: Form(
-                key: _formKey,
-                child: Padding(
-                  padding: const EdgeInsets.all(25.0),
-                  child: Column(
-                    children: <Widget>[
-                      Text(
-                        "Bienvenue, Connectez-vous",
-                        style: TextStyle(
-                            fontSize: 35,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.blueGrey),
-                      ),
-                      SizedBox(
-                        height: 50,
-                      ),
-                      TextFormField(
-                          controller: _usernameController,
-                          keyboardType: TextInputType.emailAddress,
-                          validator: (value) => value!.isEmpty
-                              ? "Entrez une adresse mail valide"
-                              : null,
-                          decoration: textInputDecoration.copyWith(
-                              hintText: "Adresse mail",
-                              labelText: "Adresse mail")),
-                      SizedBox(
-                        height: 20,
-                      ),
-                      TextFormField(
-                        controller: _passwordController,
-                        keyboardType: TextInputType.text,
-                        obscureText: true,
-                        validator: (value) => value!.length < 6
-                            ? "Entrez un mot de passe à 6 caractères au moins"
-                            : null,
-                        decoration: textInputDecoration.copyWith(
-                            hintText: "Mot de passe",
-                            labelText: "Mot de passe"),
-                      ),
-                      SizedBox(
-                        height: 30,
-                      ),
-                      ElevatedButton(
-                        onPressed: () async {
-                          if (_formKey.currentState!.validate()) {
-                            var email = _usernameController.value.text;
-                            var password = _passwordController.value.text;
-                            //Firebase auth
-                            dynamic result = await _auth
-                                .signInWithEmailAndPassword(email, password);
-                            if (result == null) {
-                              setState(() {
-                                error = 'Entrez une adresse mail valide';
-                              });
-                            }
-                          }
-                        },
-                        child: Text("Connexion"),
-                        style: ElevatedButton.styleFrom(
-                          primary: Colors.teal,
-                          minimumSize: Size(350, 50),
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(4.0)),
-                        ),
-                      ),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(left: 180.0),
-                        child: Text(
-                          "Mot de passe oublié?",
-                          textAlign: TextAlign.end,
-                        ),
-                      ),
-                      SizedBox(
-                        height: 30,
-                      ),
-                      ElevatedButton(
-                          onPressed: () {
-                            Navigator.pushNamed(context, SignupPage.routeName);
-                          },
-                          child: Text("Creer un compte"),
-                          style: ElevatedButton.styleFrom(
-                              primary: Colors.blueGrey)),
-                    ],
-                  ),
-                ),
-              ),
-            ),
-          ),
-        ],
+      appBar: AppBar(
+        backgroundColor: Colors.white,
+        elevation: 0,
       ),
-    ));
+      body: Padding(
+        padding: const EdgeInsets.all(30),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              "Bienvenue,\nConnectez-vous.",
+              style: TextStyle(
+                  fontSize: 36,
+                  fontFamily: "GilroySemiBold",
+                  fontWeight: FontWeight.w900),
+            ),
+            Image.asset("assets/images/login.png"),
+            Card(
+              elevation: 0,
+              child: Column(
+                children: [
+                  TextInputField(
+                    label: "Adresse email",
+                    hintText: "ex: jean.lemiel@exemple.xyz",
+                    suffixIcon: Ionicons.mail_open_outline,
+                  ),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  TextInputField(
+                    label: "Mot de passe",
+                    hintText: "unmotdepassefort",
+                    suffixIcon: Ionicons.key_outline,
+                  ),
+                  SizedBox(
+                    height: 30,
+                  ),
+                  ElevatedButton(
+                    onPressed: () => {},
+                    child: Text(
+                      "SE CONNECTER",
+                      style: TextStyle(fontSize: 18, fontFamily: "GilroyBold"),
+                    ),
+                    style: ElevatedButton.styleFrom(
+                      primary: Colors.black87,
+                      elevation: 0,
+                      padding: const EdgeInsets.symmetric(vertical: 20),
+                      shape: const RoundedRectangleBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(8))),
+                      minimumSize: Size(double.infinity,
+                          30), // double.infinity is the width and 30 is the height
+                    ),
+                  )
+                ],
+              ),
+            )
+          ],
+        ),
+      ),
+    );
   }
 }

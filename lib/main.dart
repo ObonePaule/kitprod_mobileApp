@@ -5,6 +5,7 @@ import 'package:kitprod/components/user.dart';
 import 'package:kitprod/pages/auth/authentication.dart';
 import 'package:kitprod/pages/auth/signin.dart';
 import 'package:kitprod/pages/auth/signup.dart';
+import 'package:kitprod/pages/auth/splash-screen-wrapper.dart';
 //import 'package:kitprod/pages/auth/splash-screen-wrapper.dart';
 import 'package:kitprod/pages/building/building-form.dart';
 import 'package:kitprod/pages/building/building-list.dart';
@@ -24,6 +25,7 @@ import 'package:kitprod/pages/lotSheet/lotsheet-form.dart';
 import 'package:kitprod/pages/rawmaterial/rawmaterial-form.dart';
 import 'package:kitprod/pages/rawmaterial/rawmaterial-list.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:kitprod/utils/color.dart';
 import 'package:provider/provider.dart';
 
 Future main() async {
@@ -41,10 +43,15 @@ class MyApp extends StatelessWidget {
       initialData: null,
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        home: MenuExploitationPage(),
+        home: SplashScreenWrapper(),
         theme: ThemeData(
-          primarySwatch: Colors.purple,
-        ),
+            primaryColor: CustomColors.brandingSecondaryGreen,
+            scaffoldBackgroundColor: Colors.white,
+            textSelectionTheme: Theme.of(context).textSelectionTheme.copyWith(
+                cursorColor: CustomColors.brandingSecondaryGreen,
+                selectionHandleColor: CustomColors.brandingSecondaryGreen),
+            textTheme:
+                Theme.of(context).textTheme.apply(fontFamily: "GilroyRegular")),
         routes: {
           SigninPage.routeName: (context) => SigninPage(),
           SignupPage.routeName: (context) => SignupPage(),
