@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:ionicons/ionicons.dart';
-import 'package:kitprod/components/constants.dart';
 import 'package:kitprod/components/text-input-field.dart';
 import 'package:kitprod/pages/auth/authentication.dart';
-import 'package:kitprod/pages/auth/signup.dart';
 import 'package:kitprod/utils/color.dart';
 
 class SigninPage extends StatefulWidget {
-  static const String routeName = " Signin";
+  static const String routeName = "Signin";
 
   @override
   SigninPageState createState() => SigninPageState();
@@ -22,6 +20,17 @@ class SigninPageState extends State<SigninPage> {
   String error = '';
 
   @override
+  void initState() {
+    // Pour mettre la page en plein écran
+    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+      statusBarColor: Colors.white,
+    ));
+    SystemChrome.setEnabledSystemUIOverlays([SystemUiOverlay.top]);
+
+    super.initState();
+  }
+
+  @override
   void dispose() {
     _usernameController.dispose();
     _passwordController.dispose();
@@ -30,67 +39,104 @@ class SigninPageState extends State<SigninPage> {
 
   @override
   Widget build(BuildContext context) {
-    // Pour mettre la page en plein écran
-    SystemChrome.setEnabledSystemUIOverlays([]);
-
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.white,
-        elevation: 0,
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(30),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              "Bienvenue,\nConnectez-vous.",
-              style: TextStyle(
-                  fontSize: 36,
-                  fontFamily: "GilroySemiBold",
-                  fontWeight: FontWeight.w900),
-            ),
-            Image.asset("assets/images/login.png"),
-            Card(
-              elevation: 0,
-              child: Column(
+      extendBodyBehindAppBar: true,
+      body: SafeArea(
+        child: SingleChildScrollView(
+          padding: const EdgeInsets.all(30),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                "Bienvenue,\nConnectez-vous.",
+                style: TextStyle(
+                    fontSize: 32,
+                    fontFamily: "GilroySemiBold",
+                    color: CustomColors.brandingGreenDark,
+                    fontWeight: FontWeight.w900),
+              ),
+              SizedBox(
+                height: 35,
+              ),
+              Center(
+                child: Image.asset(
+                  "assets/images/signin.png",
+                ),
+              ),
+              SizedBox(
+                height: 25,
+              ),
+              Column(
                 children: [
-                  TextInputField(
+                  formInputControl(
                     label: "Adresse email",
                     hintText: "ex: jean.lemiel@exemple.xyz",
-                    suffixIcon: Ionicons.mail_open_outline,
+                    icon: Ionicons.mail_open,
+                    inputType: TextInputType.emailAddress,
+                    controller: _usernameController
                   ),
                   SizedBox(
                     height: 20,
                   ),
-                  TextInputField(
-                    label: "Mot de passe",
-                    hintText: "unmotdepassefort",
-                    suffixIcon: Ionicons.key_outline,
+                  formInputControl(
+                      label: "Mot de passe",
+                      hintText: "unmotdepassefort",
+                      icon: Ionicons.key,
+                      obscureText: true,
+                      inputType: TextInputType.text),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      TextButton(
+                        onPressed: () => {},
+                        child: Text(
+                          "Mot de passe oublié ?",
+                          style: TextStyle(fontFamily: "GilroySemiBold"),
+                        ),
+                        style: TextButton.styleFrom(
+                            primary: CustomColors.brandingSecondaryGreen),
+                      ),
+                    ],
                   ),
                   SizedBox(
-                    height: 30,
+                    height: 10,
                   ),
                   ElevatedButton(
                     onPressed: () => {},
                     child: Text(
                       "SE CONNECTER",
-                      style: TextStyle(fontSize: 18, fontFamily: "GilroyBold"),
+                      style: TextStyle(fontSize: 16, fontFamily: "GilroyBold"),
                     ),
                     style: ElevatedButton.styleFrom(
-                      primary: Colors.black87,
+                      primary: CustomColors.brandingGreenDark,
                       elevation: 0,
-                      padding: const EdgeInsets.symmetric(vertical: 20),
+                      padding: const EdgeInsets.symmetric(vertical: 15),
                       shape: const RoundedRectangleBorder(
                           borderRadius: BorderRadius.all(Radius.circular(8))),
-                      minimumSize: Size(double.infinity,
-                          30), // double.infinity is the width and 30 is the height
+                      minimumSize: Size(double.infinity, 30),
                     ),
-                  )
+                  ),
+                  SizedBox(
+                    height: 5,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      TextButton(
+                        onPressed: () => {},
+                        child: Text(
+                          "Créer un nouveau compte",
+                          style: TextStyle(fontFamily: "GilroySemiBold"),
+                        ),
+                        style: TextButton.styleFrom(
+                            primary: CustomColors.brandingSecondaryGreen),
+                      ),
+                    ],
+                  ),
                 ],
-              ),
-            )
-          ],
+              )
+            ],
+          ),
         ),
       ),
     );
