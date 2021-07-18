@@ -3,6 +3,8 @@ import 'package:flutter/services.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:kitprod/components/text-input-field.dart';
 import 'package:kitprod/pages/auth/authentication.dart';
+import 'package:kitprod/pages/auth/elevated-button.dart';
+import 'package:kitprod/pages/auth/text-button.dart';
 import 'package:kitprod/utils/color.dart';
 
 class SigninPage extends StatefulWidget {
@@ -69,12 +71,11 @@ class SigninPageState extends State<SigninPage> {
               Column(
                 children: [
                   formInputControl(
-                    label: "Adresse email",
-                    hintText: "ex: jean.lemiel@exemple.xyz",
-                    icon: Ionicons.mail_open,
-                    inputType: TextInputType.emailAddress,
-                    controller: _usernameController
-                  ),
+                      label: "Adresse email",
+                      hintText: "ex: jean.lemiel@exemple.xyz",
+                      icon: Ionicons.mail_open,
+                      inputType: TextInputType.emailAddress,
+                      controller: _usernameController),
                   SizedBox(
                     height: 20,
                   ),
@@ -83,54 +84,25 @@ class SigninPageState extends State<SigninPage> {
                       hintText: "unmotdepassefort",
                       icon: Ionicons.key,
                       obscureText: true,
-                      inputType: TextInputType.text),
+                      inputType: TextInputType.text,
+                      controller: _passwordController),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
-                      TextButton(
-                        onPressed: () => {},
-                        child: Text(
-                          "Mot de passe oublié ?",
-                          style: TextStyle(fontFamily: "GilroySemiBold"),
-                        ),
-                        style: TextButton.styleFrom(
-                            primary: CustomColors.brandingSecondaryGreen),
-                      ),
+                      textButton("Mot de passe oublié ?"),
                     ],
                   ),
                   SizedBox(
                     height: 10,
                   ),
-                  ElevatedButton(
-                    onPressed: () => {},
-                    child: Text(
-                      "SE CONNECTER",
-                      style: TextStyle(fontSize: 16, fontFamily: "GilroyBold"),
-                    ),
-                    style: ElevatedButton.styleFrom(
-                      primary: CustomColors.brandingGreenDark,
-                      elevation: 0,
-                      padding: const EdgeInsets.symmetric(vertical: 15),
-                      shape: const RoundedRectangleBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(8))),
-                      minimumSize: Size(double.infinity, 30),
-                    ),
-                  ),
+                  elevatedButton("Se connecter"),
                   SizedBox(
                     height: 5,
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      TextButton(
-                        onPressed: () => {},
-                        child: Text(
-                          "Créer un nouveau compte",
-                          style: TextStyle(fontFamily: "GilroySemiBold"),
-                        ),
-                        style: TextButton.styleFrom(
-                            primary: CustomColors.brandingSecondaryGreen),
-                      ),
+                      textButton("Créer un nouveau compte"),
                     ],
                   ),
                 ],
