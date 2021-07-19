@@ -24,6 +24,7 @@ import 'package:kitprod/pages/lotSheet/lotsheet-form.dart';
 import 'package:kitprod/pages/rawmaterial/rawmaterial-form.dart';
 import 'package:kitprod/pages/rawmaterial/rawmaterial-list.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:kitprod/utils/color.dart';
 import 'package:provider/provider.dart';
 
 Future main() async {
@@ -43,8 +44,13 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         home: SplashScreenWrapper(),
         theme: ThemeData(
-          primarySwatch: Colors.purple,
-        ),
+            primaryColor: CustomColors.brandingSecondaryGreen,
+            scaffoldBackgroundColor: Colors.white,
+            textSelectionTheme: Theme.of(context).textSelectionTheme.copyWith(
+                cursorColor: CustomColors.brandingSecondaryGreen,
+                selectionHandleColor: CustomColors.brandingSecondaryGreen),
+            textTheme:
+                Theme.of(context).textTheme.apply(fontFamily: "GilroyRegular")),
         routes: {
           SigninPage.routeName: (context) => SigninPage(),
           SignupPage.routeName: (context) => SignupPage(),
