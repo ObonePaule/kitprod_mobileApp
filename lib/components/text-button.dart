@@ -6,7 +6,7 @@ TextButton textButton(String text, {void Function()? onPress}) {
     onPressed: onPress,
     child: Text(
       text,
-      style: TextStyle(fontFamily: "GilroySemiBold"),
+      style: TextStyle(fontFamily: "GilroyBold"),
     ),
     style: TextButton.styleFrom(primary: CustomColors.brandingSecondaryGreen),
   );
