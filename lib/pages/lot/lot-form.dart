@@ -117,7 +117,8 @@ class _LotFormPageState extends State<LotFormPage> {
     var body = jsonEncode(obj.toJson());
 
     var obj2 = await insertLot(building.id!, body);
-    print(obj2);
-    Navigator.pop(context);
+    if (obj2 != null) {
+      Navigator.pop(context);
+    }
   }
 }

@@ -65,7 +65,6 @@ class _EmployeeFormPageState extends State<EmployeeFormPage> {
                             employeeNumberController.text.trim()));
                     var body = jsonEncode(obj.toJson());
 
-                    // print(body);
                     obj = await insertEmployeeTmp(body);
                     if (obj != null) {
                       Navigator.pop(context);

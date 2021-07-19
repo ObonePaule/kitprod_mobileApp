@@ -61,8 +61,7 @@ class _FoodFormPageState extends State<FoodFormPage> {
     var body = jsonEncode(obj.toJson());
 
     var obj2 = await insertFood(body);
-    //print(obj2);
-    if (obj2 != 0) {
+    if (obj2 != null) {
       Navigator.pop(context);
     }
   }

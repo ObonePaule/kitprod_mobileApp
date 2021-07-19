@@ -34,7 +34,11 @@ Future insertTask(String body) async {
       });
 
   if (response.statusCode == 200) {
-    return FixedTask.fromJson(json.decode(response.body));
+    Iterable tasksJson = jsonDecode(response.body);
+    List<FixedTask> tasks = List<FixedTask>.from(
+        tasksJson.map((modelAsJson) => FixedTask.fromJson(modelAsJson)));
+
+    return tasks;
   } else {
     return null;
   }

@@ -20,7 +20,7 @@ Future<List<Food>> getFoodList() async {
   return foods;
 }
 
-Future<int> insertFood(String body) async {
+Future<Food?> insertFood(String body) async {
   String idExploitation = await getCurrentExploitationId();
   var params = {
     'idExploitation': idExploitation,
@@ -31,10 +31,9 @@ Future<int> insertFood(String body) async {
         'Content-Type': 'application/json',
         'Accept': 'application/json'
       });
-  //print(Food.fromJson(json.decode(response.body)));
   if (response.statusCode == 200) {
-    return response.statusCode;
+    return Food.fromJson(json.decode(response.body));
   } else {
-    return 0;
+    return null;
   }
 }

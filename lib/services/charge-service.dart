@@ -14,7 +14,6 @@ Future<List<Charge>> getCharges() async {
     'idExploitation': idExploitation,
   };
   var response = await http.get(Uri.https(host, path, params));
-  print(response.body);
   Iterable chargesJson = jsonDecode(response.body);
   List<Charge> charges = List<Charge>.from(
       chargesJson.map((modelAsJson) => Charge.fromJson(modelAsJson)));

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:kitprod/components/constants.dart';
+import 'package:kitprod/components/menu.dart';
+import 'package:kitprod/components/user.dart';
 import 'package:kitprod/pages/auth/authentication.dart';
 import 'package:kitprod/pages/auth/signup.dart';
 
@@ -87,12 +89,18 @@ class SigninPageState extends State<SigninPage> {
                             var email = _usernameController.value.text;
                             var password = _passwordController.value.text;
                             //Firebase auth
-                            dynamic result = await _auth
+                            AppUser? appUser = await _auth
                                 .signInWithEmailAndPassword(email, password);
-                            if (result == null) {
+
+                            if (appUser == null) {
                               setState(() {
                                 error = 'Entrez une adresse mail valide';
                               });
+                            } else {
+                              print(appUser);
+                              Navigator.of(context).pushReplacement(
+                                  MaterialPageRoute(
+                                      builder: (context) => MenuPage()));
                             }
                           }
                         },

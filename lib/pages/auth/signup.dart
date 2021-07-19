@@ -1,5 +1,9 @@
+import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:kitprod/components/user.dart';
 import 'package:kitprod/pages/auth/authentication.dart';
+import 'package:kitprod/pages/auth/signin.dart';
+import 'package:kitprod/services/user-service.dart';
 
 class SignupPage extends StatefulWidget {
   static const String routeName = "signup";
@@ -103,13 +107,26 @@ class _SignupPageState extends State<SignupPage> {
                               var password = _passwordController.value.text;
 
                               //Firebase auth
-                              dynamic result =
+                              AppUser? appUser =
                                   await _auth.registerWithEmailAndPassword(
                                       name, email, password);
-                              if (result == null) {
+
+                              if (appUser == null) {
                                 setState(() {
                                   error = 'Entrez une adresse mail valide';
                                 });
+                              } else {
+                                appUser.fullName = name;
+                                appUser.email = email;
+
+                                var body = jsonEncode(appUser.toJson());
+                                var insertedUser = await insertUser(body);
+
+                                if (insertedUser != null) {
+                                  Navigator.of(context).pushReplacement(
+                                      MaterialPageRoute(
+                                          builder: (context) => SigninPage()));
+                                }
                               }
                             }
                           },
