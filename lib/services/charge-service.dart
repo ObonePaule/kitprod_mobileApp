@@ -21,7 +21,7 @@ Future<List<Charge>> getCharges() async {
   return charges;
 }
 
-Future insertCharges(String body) async {
+Future<List<Charge>?> insertCharges(String body) async {
   String idExploitation = await getCurrentExploitationId();
   var params = {
     'idExploitation': idExploitation,
@@ -34,7 +34,9 @@ Future insertCharges(String body) async {
       });
 
   if (response.statusCode == 200) {
-    return "super";
+    return (json.decode(response.body) as List)
+        .map((i) => Charge.fromJson(i))
+        .toList();
   } else {
     return null;
   }

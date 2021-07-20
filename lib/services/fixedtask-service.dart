@@ -15,8 +15,8 @@ Future<List<FixedTask>> getTasks() async {
   };
   var response = await http.get(Uri.https(host, path, params));
   Iterable tasksJson = jsonDecode(response.body);
-  List<FixedTask> tasks = List<FixedTask>.from(
-      tasksJson.map((modelAsJson) => FixedTask.fromJson(modelAsJson)));
+  List<FixedTask> tasks =
+      List<FixedTask>.from(tasksJson.map((i) => FixedTask.fromJson(i)));
 
   return tasks;
 }
@@ -34,11 +34,9 @@ Future insertTask(String body) async {
       });
 
   if (response.statusCode == 200) {
-    Iterable tasksJson = jsonDecode(response.body);
-    List<FixedTask> tasks = List<FixedTask>.from(
-        tasksJson.map((modelAsJson) => FixedTask.fromJson(modelAsJson)));
-
-    return tasks;
+    return (json.decode(response.body) as List)
+        .map((i) => FixedTask.fromJson(i))
+        .toList();
   } else {
     return null;
   }
