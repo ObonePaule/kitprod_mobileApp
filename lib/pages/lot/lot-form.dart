@@ -81,7 +81,7 @@ class _LotFormPageState extends State<LotFormPage> {
                       hintText: "Coût litière", labelText: "Coût litière"),
                 ),
                 SizedBox(
-                  height: 400,
+                  height: 200,
                 ),
                 ElevatedButton(
                   onPressed: () {
