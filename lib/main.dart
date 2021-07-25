@@ -21,6 +21,7 @@ import 'package:kitprod/pages/home.dart';
 import 'package:kitprod/pages/lot/lot-form.dart';
 import 'package:kitprod/pages/lot/lot-list.dart';
 import 'package:kitprod/pages/lotSheet/lotsheet-form.dart';
+import 'package:kitprod/pages/lotsheet/lotsheet-list.dart';
 import 'package:kitprod/pages/rawmaterial/rawmaterial-form.dart';
 import 'package:kitprod/pages/rawmaterial/rawmaterial-list.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
@@ -62,6 +63,7 @@ class MyApp extends StatelessWidget {
           LotFormPage.routeName: (context) => LotFormPage(),
           LotListPage.routeName: (context) => LotListPage(),
           LotSheetFormPage.routeName: (context) => LotSheetFormPage(),
+          LotSheetListPage.routeName: (context) => LotSheetListPage(),
           ChargeFormPage.routeName: (context) => ChargeFormPage(),
           ChargeListPage.routeName: (context) => ChargeListPage(),
           FixedTaskFormPage.routeName: (context) => FixedTaskFormPage(),

@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:kitprod/models/building.dart';
 import 'package:kitprod/models/lot.dart';
-//import 'package:kitprod/models/lotSheet.dart';
 import 'package:kitprod/pages/lot/lot-form.dart';
-//import 'package:kitprod/pages/lotsheet/lotsheet-list.dart';
+import 'package:kitprod/pages/lotsheet/lotsheet-list.dart';
 import 'package:kitprod/services/lot-service.dart';
 
 class LotListPage extends StatefulWidget {
@@ -31,6 +30,7 @@ class _LotListPageState extends State<LotListPage> {
     final args = ModalRoute.of(context)!.settings.arguments as Building;
     setState(() {
       building = args;
+      print(building);
     });
     return Scaffold(
       appBar: AppBar(
@@ -60,7 +60,8 @@ class _LotListPageState extends State<LotListPage> {
   FloatingActionButton renderFloatingActionButton(BuildContext context) {
     return FloatingActionButton(
       onPressed: () {
-        Navigator.pushNamed(context, LotFormPage.routeName)
+        Navigator.pushNamed(context, LotFormPage.routeName,
+                arguments: Building(id: building.id))
             .then((value) => setState(() {}));
       },
       child: const Icon(Icons.add),
@@ -74,8 +75,11 @@ class _LotListPageState extends State<LotListPage> {
           child:
               Card(child: ListTile(title: Text(snapshot.data![index].name!))),
           onTap: () {
-            // Navigator.pushNamed(context, LotSheetListPage.routeName,
-            //     arguments: LotSheet(id: snapshot.data![index].id));
+            Navigator.pushNamed(context, LotSheetListPage.routeName,
+                arguments: {
+                  'lot': Lot(id: snapshot.data![index].id),
+                  'building': Building(id: building.id)
+                });
           },
         );
       },

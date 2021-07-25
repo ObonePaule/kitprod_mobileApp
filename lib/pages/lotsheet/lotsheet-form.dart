@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
 //import 'package:kitprod/components/elevated-button-save.dart';
 
-class LotSheetFormPage extends StatelessWidget {
+class LotSheetFormPage extends StatefulWidget {
   static const String routeName = "/lotsheetform";
 
+  @override
+  _LotSheetFormPageState createState() => _LotSheetFormPageState();
+}
+
+class _LotSheetFormPageState extends State<LotSheetFormPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
