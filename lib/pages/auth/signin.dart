@@ -21,7 +21,9 @@ class SigninPageState extends State<SigninPage> {
   final _usernameController = TextEditingController();
   final _passwordController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
+
   final AuthenticationService _auth = AuthenticationService();
+
   String error = '';
 
   @override
