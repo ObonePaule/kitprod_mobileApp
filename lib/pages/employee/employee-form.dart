@@ -1,6 +1,4 @@
 import 'dart:convert';
-//import 'package:http/http.dart' as http;
-
 import 'package:flutter/material.dart';
 import 'package:kitprod/models/employee.dart';
 import 'package:kitprod/components/controllers.dart';
@@ -56,19 +54,8 @@ class _EmployeeFormPageState extends State<EmployeeFormPage> {
                   height: 400,
                 ),
                 ElevatedButton(
-                  onPressed: () async {
-                    Employee? obj = Employee(
-                        hourCost:
-                            double.tryParse(employeeCostController.text.trim()),
-                        name: employeeNameController.text.trim(),
-                        numberOfHour: double.tryParse(
-                            employeeNumberController.text.trim()));
-                    var body = jsonEncode(obj.toJson());
-
-                    obj = await insertEmployeeTmp(body);
-                    if (obj != null) {
-                      Navigator.pop(context);
-                    }
+                  onPressed: () {
+                    createEmployee(context);
                   },
                   child: Text("Enregistrer"),
                   style: ElevatedButton.styleFrom(
@@ -84,5 +71,18 @@ class _EmployeeFormPageState extends State<EmployeeFormPage> {
         ),
       ),
     );
+  }
+
+  Future createEmployee(context) async {
+    Employee? obj = Employee(
+        hourCost: double.tryParse(employeeCostController.text.trim()),
+        name: employeeNameController.text.trim(),
+        numberOfHour: double.tryParse(employeeNumberController.text.trim()));
+    var body = jsonEncode(obj.toJson());
+
+    obj = await insertEmployeeTmp(body);
+    if (obj != null) {
+      Navigator.pop(context);
+    }
   }
 }

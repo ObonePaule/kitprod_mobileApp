@@ -23,7 +23,7 @@ Future<List<Employee>> getEmployeeList() async {
 Future<Employee?> insertEmployeeTmp(String body) async {
   String idExploitation = await getCurrentExploitationId();
   var params = {
-    'idExploitation': idExploitation.toString(),
+    'idExploitation': idExploitation,
   };
   var response = await http.post(Uri.https(host, path, params),
       body: body,
@@ -32,8 +32,9 @@ Future<Employee?> insertEmployeeTmp(String body) async {
         'Accept': 'application/json'
       });
 
+  var insertedEmployee = Employee.fromJson(json.decode(response.body));
   if (response.statusCode == 200) {
-    return Employee.fromJson(json.decode(response.body));
+    return insertedEmployee;
   } else {
     return null;
   }

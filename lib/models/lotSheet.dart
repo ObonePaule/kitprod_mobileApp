@@ -1,50 +1,94 @@
-// To parse this JSON data, do
-//
-//     final lotSheet = lotSheetFromJson(jsonString);
-
 import 'dart:convert';
+
+import 'package:kitprod/models/removal.dart';
 
 LotSheet lotSheetFromJson(String str) => LotSheet.fromJson(json.decode(str));
 
 String lotSheetToJson(LotSheet data) => json.encode(data.toJson());
 
 class LotSheet {
-  LotSheet({
-    this.id,
-    this.dateDebut,
-    this.dateFin,
-    this.loss,
-    this.feedingAndCareTime,
-    this.removalWeight,
-    this.removalNumber,
-  });
+  LotSheet(
+      {this.id,
+      required this.dateDebut,
+      this.loss,
+      this.dailyFood,
+      this.complement,
+      this.feedingAndCareTime,
+      this.manufacturingTime,
+      this.specialEvent,
+      this.removal});
 
   String? id;
-  DateTime? dateDebut;
-  DateTime? dateFin;
+  DateTime dateDebut;
   int? loss;
-  int? feedingAndCareTime;
-  int? removalWeight;
-  int? removalNumber;
+  DailyFood? dailyFood;
+  String? complement;
+  double? feedingAndCareTime;
+  double? manufacturingTime;
+  SpecialEvent? specialEvent;
+  Removal? removal;
 
   factory LotSheet.fromJson(Map<String, dynamic> json) => LotSheet(
         id: json["id"],
         dateDebut: DateTime.parse(json["dateDebut"]),
-        dateFin: DateTime.parse(json["dateFin"]),
         loss: json["loss"],
+        dailyFood: DailyFood.fromJson(json["dailyFood"]),
+        complement: json["complement"],
         feedingAndCareTime: json["feedingAndCareTime"],
-        removalWeight: json["removalWeight"],
-        removalNumber: json["removalNumber"],
+        manufacturingTime: json["manufacturingTime"],
+        specialEvent: SpecialEvent.fromJson(json["specialEvent"]),
+        removal: Removal.fromJson(json["removal"]),
       );
 
   Map<String, dynamic> toJson() => {
         "dateDebut":
-            "${dateDebut!.year.toString().padLeft(4, '0')}-${dateDebut!.month.toString().padLeft(2, '0')}-${dateDebut!.day.toString().padLeft(2, '0')}",
-        "dateFin":
-            "${dateFin!.year.toString().padLeft(4, '0')}-${dateFin!.month.toString().padLeft(2, '0')}-${dateFin!.day.toString().padLeft(2, '0')}",
+            "${dateDebut.year.toString().padLeft(4, '0')}-${dateDebut.month.toString().padLeft(2, '0')}-${dateDebut.day.toString().padLeft(2, '0')}",
         "loss": loss,
+        "dailyFood": dailyFood!.toJson(),
+        "complement": complement,
         "feedingAndCareTime": feedingAndCareTime,
-        "removalWeight": removalWeight,
-        "removalNumber": removalNumber,
+        "manufacturingTime": manufacturingTime,
+        "specialEvent": specialEvent!.toJson(),
+        "removal": removal!.toJson(),
+      };
+}
+
+class SpecialEvent {
+  SpecialEvent({
+    this.vaccin,
+    this.fraisVeterinaires,
+  });
+
+  double? vaccin;
+  double? fraisVeterinaires;
+
+  factory SpecialEvent.fromJson(Map<String, dynamic> json) => SpecialEvent(
+        vaccin: json["vaccin"].toDouble(),
+        fraisVeterinaires: json["frais veterinaires"].toDouble(),
+      );
+
+  Map<String, dynamic> toJson() => {
+        "vaccin": vaccin,
+        "frais veterinaires": fraisVeterinaires,
+      };
+}
+
+class DailyFood {
+  DailyFood({
+    required this.type,
+    required this.value,
+  });
+
+  String type;
+  double value;
+
+  factory DailyFood.fromJson(Map<String, dynamic> json) => DailyFood(
+        type: json["type"],
+        value: json["value"].toDouble(),
+      );
+
+  Map<String, dynamic> toJson() => {
+        "type": type,
+        "value": value,
       };
 }

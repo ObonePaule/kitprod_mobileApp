@@ -12,8 +12,10 @@ Future<AppUser?> insertUser(String body) async {
     'Content-Type': 'application/json',
     'Accept': 'application/json'
   });
+
+  var appUser = AppUser.fromJson(json.decode(response.body));
   if (response.statusCode == 200) {
-    return AppUser.fromJson(json.decode(response.body));
+    return appUser;
   } else {
     return null;
   }

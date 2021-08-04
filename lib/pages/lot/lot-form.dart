@@ -111,13 +111,13 @@ class _LotFormPageState extends State<LotFormPage> {
         costByAnimal: double.tryParse(lotCostByAnimalController.text.trim()),
         number: int.tryParse(lotNumberOfFemales.text.trim()),
         costOfLitter: double.tryParse(lotCostOfLitterController.text.trim()),
-        lotSheet: null);
+        lotSheets: []);
     //isArchived: bool)
 
     var body = jsonEncode(obj.toJson());
 
-    var obj2 = await insertLot(building.id!, body);
-    if (obj2 != null) {
+    var insertedLot = await insertLot(building.id!, body);
+    if (insertedLot != null) {
       Navigator.pop(context);
     }
   }

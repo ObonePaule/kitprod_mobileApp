@@ -27,8 +27,10 @@ Future<RawMaterial?> insertRawMaterial(String idFood, String body) async {
         'Content-Type': 'application/json',
         'Accept': 'application/json'
       });
+
+  var insertedRawMaterial = RawMaterial.fromJson(json.decode(response.body));
   if (response.statusCode == 200) {
-    return RawMaterial.fromJson(json.decode(response.body));
+    return insertedRawMaterial;
   } else {
     return null;
   }

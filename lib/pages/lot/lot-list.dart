@@ -30,7 +30,6 @@ class _LotListPageState extends State<LotListPage> {
     final args = ModalRoute.of(context)!.settings.arguments as Building;
     setState(() {
       building = args;
-      print(building);
     });
     return Scaffold(
       appBar: AppBar(
@@ -50,13 +49,11 @@ class _LotListPageState extends State<LotListPage> {
         } else if (snapshot.hasError) {
           return Center(child: Text("${snapshot.error}"));
         }
-        // By default, show a loading spinner.
         return CircularProgressIndicator();
       },
     );
   }
 
-//Pas de retour en arriere. Page vide avec ajout de fiche de lot
   FloatingActionButton renderFloatingActionButton(BuildContext context) {
     return FloatingActionButton(
       onPressed: () {

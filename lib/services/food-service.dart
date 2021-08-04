@@ -10,7 +10,7 @@ final String path = '/foods';
 Future<List<Food>> getFoodList() async {
   String idExploitation = await getCurrentExploitationId();
   var params = {
-    'idExploitation': idExploitation.toString(),
+    'idExploitation': idExploitation,
   };
   var response = await http.get(Uri.https(host, path, params));
   Iterable foodsJson = jsonDecode(response.body);
@@ -18,6 +18,12 @@ Future<List<Food>> getFoodList() async {
       foodsJson.map((modelAsJson) => Food.fromJson(modelAsJson)));
 
   return foods;
+}
+
+Future<List<String>> getFoods() async {
+  List<Food> foods = await getFoodList();
+  List<String> foodStrings = List<String>.from(foods.map((food) => food.name));
+  return foodStrings;
 }
 
 Future<Food?> insertFood(String body) async {
@@ -31,8 +37,10 @@ Future<Food?> insertFood(String body) async {
         'Content-Type': 'application/json',
         'Accept': 'application/json'
       });
+
+  var insertedFood = Food.fromJson(json.decode(response.body));
   if (response.statusCode == 200) {
-    return Food.fromJson(json.decode(response.body));
+    return insertedFood;
   } else {
     return null;
   }

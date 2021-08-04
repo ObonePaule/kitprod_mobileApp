@@ -23,9 +23,14 @@ Future<List<LotSheet>> getLotSheetList(String idBuilding, String idLot) async {
   return lotsheets;
 }
 
-Future<Lot?> insertLot(String idBuilding, String body) async {
+Future<Lot?> insertLotSheet(
+    String idBuilding, String idLot, String body) async {
   String idExploitation = await getCurrentExploitationId();
-  var params = {'idExploitation': idExploitation, 'idBuilding': idBuilding};
+  var params = {
+    'idExploitation': idExploitation,
+    'idBuilding': idBuilding,
+    'idLot': idLot
+  };
   var response = await http.post(Uri.https(host, path, params),
       body: body,
       headers: {

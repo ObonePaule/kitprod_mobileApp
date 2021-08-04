@@ -9,10 +9,7 @@ final String path = '/lots';
 
 Future<List<Lot>> getLotList(String idBuilding) async {
   String idExploitation = await getCurrentExploitationId();
-  var params = {
-    'idExploitation': idExploitation.toString(),
-    'idBuilding': idBuilding.toString()
-  };
+  var params = {'idExploitation': idExploitation, 'idBuilding': idBuilding};
   var response = await http.get(Uri.https(host, path, params));
   Iterable lotsJson = jsonDecode(response.body);
   List<Lot> lots =
@@ -31,8 +28,9 @@ Future<Lot?> insertLot(String idBuilding, String body) async {
         'Accept': 'application/json'
       });
 
+  var insertedLot = Lot.fromJson(json.decode(response.body));
   if (response.statusCode == 200) {
-    return Lot.fromJson(json.decode(response.body));
+    return insertedLot;
   } else {
     return null;
   }

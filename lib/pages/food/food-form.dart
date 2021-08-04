@@ -1,8 +1,6 @@
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:kitprod/components/controllers.dart';
-//import 'package:kitprod/models/exploitation.dart';
 import 'package:kitprod/models/food.dart';
 import 'package:kitprod/services/food-service.dart';
 
@@ -57,11 +55,11 @@ class _FoodFormPageState extends State<FoodFormPage> {
   }
 
   createFood(context) async {
-    Food? obj = Food(name: foodNameController.text.trim());
-    var body = jsonEncode(obj.toJson());
+    Food? food = Food(name: foodNameController.text.trim());
+    var body = jsonEncode(food.toJson());
 
-    var obj2 = await insertFood(body);
-    if (obj2 != null) {
+    var insertedFood = await insertFood(body);
+    if (insertedFood != null) {
       Navigator.pop(context);
     }
   }

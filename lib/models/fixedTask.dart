@@ -1,7 +1,3 @@
-// To parse this JSON data, do
-//
-//     final fixedTask = fixedTaskFromJson(jsonString);
-
 import 'dart:convert';
 
 FixedTask fixedTaskFromJson(String str) => FixedTask.fromJson(json.decode(str));

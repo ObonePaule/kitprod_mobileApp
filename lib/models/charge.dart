@@ -5,21 +5,17 @@ Charge chargeFromJson(String str) => Charge.fromJson(json.decode(str));
 String chargeToJson(Charge data) => json.encode(data.toJson());
 
 class Charge {
-  Charge({
-    required this.value,
-    required this.chargeType,
-  });
+  Charge({this.id, required this.chargeType, required this.value});
 
-  double? value;
+  String? id;
   String chargeType;
+  double? value;
 
   factory Charge.fromJson(Map<String, dynamic> json) => Charge(
-        value: json["value"],
-        chargeType: json["chargeType"],
-      );
+      id: json["id"], chargeType: json["chargeType"], value: json["value"]);
 
   Map<String, dynamic> toJson() => {
-        "value": value,
         "chargeType": chargeType,
+        "value": value,
       };
 }

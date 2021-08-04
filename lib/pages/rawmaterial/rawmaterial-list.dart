@@ -48,13 +48,11 @@ class _RawMaterialListPageState extends State<RawMaterialListPage> {
         } else if (snapshot.hasError) {
           return Center(child: Text("${snapshot.error}"));
         }
-        // By default, show a loading spinner.
         return CircularProgressIndicator();
       },
     );
   }
 
-//Pas de retour en arriere. Page vide avec ajout de fiche de lot
   FloatingActionButton renderFloatingActionButton(BuildContext context) {
     return FloatingActionButton(
       onPressed: () {

@@ -33,10 +33,11 @@ Future<List<Charge>?> insertCharges(String body) async {
         'Accept': 'application/json'
       });
 
+  var insertedCharges = (json.decode(response.body) as List)
+      .map((i) => Charge.fromJson(i))
+      .toList();
   if (response.statusCode == 200) {
-    return (json.decode(response.body) as List)
-        .map((i) => Charge.fromJson(i))
-        .toList();
+    return insertedCharges;
   } else {
     return null;
   }

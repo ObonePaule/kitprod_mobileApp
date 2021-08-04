@@ -23,7 +23,7 @@ Future<List<Building>> getBuildingList() async {
 Future<Building?> insertBuilding(String body) async {
   String idExploitation = await getCurrentExploitationId();
   var params = {
-    'idExploitation': idExploitation.toString(),
+    'idExploitation': idExploitation,
   };
   var response = await http.post(Uri.https(host, path, params),
       body: body,
@@ -31,8 +31,10 @@ Future<Building?> insertBuilding(String body) async {
         'Content-Type': 'application/json',
         'Accept': 'application/json'
       });
+
+  var insertedBuilding = Building.fromJson(json.decode(response.body));
   if (response.statusCode == 200) {
-    return Building.fromJson(json.decode(response.body));
+    return insertedBuilding;
   } else {
     return null;
   }

@@ -11,7 +11,7 @@ final String path = '/fixedtasks';
 Future<List<FixedTask>> getTasks() async {
   String idExploitation = await getCurrentExploitationId();
   var params = {
-    'idExploitation': idExploitation.toString(),
+    'idExploitation': idExploitation,
   };
   var response = await http.get(Uri.https(host, path, params));
   Iterable tasksJson = jsonDecode(response.body);
@@ -33,10 +33,11 @@ Future insertTask(String body) async {
         'Accept': 'application/json'
       });
 
+  var insertedFixedTasks = (json.decode(response.body) as List)
+      .map((i) => FixedTask.fromJson(i))
+      .toList();
   if (response.statusCode == 200) {
-    return (json.decode(response.body) as List)
-        .map((i) => FixedTask.fromJson(i))
-        .toList();
+    return insertedFixedTasks;
   } else {
     return null;
   }

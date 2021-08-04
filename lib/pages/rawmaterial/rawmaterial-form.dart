@@ -79,15 +79,15 @@ class _RawMaterialFormPageState extends State<RawMaterialFormPage> {
   }
 
   createRawMaterial(context) async {
-    RawMaterial? obj = RawMaterial(
+    RawMaterial? rawMaterial = RawMaterial(
         name: rawNameController.text.trim(),
         proportion: double.tryParse(rawProportionController.text.trim()),
         mpPrice: double.tryParse(rawMpPriceController.text.trim()));
 
-    var body = jsonEncode(obj.toJson());
+    var body = jsonEncode(rawMaterial.toJson());
 
-    var obj2 = await insertRawMaterial(food.id!, body);
-    if (obj2 != null) {
+    var insertedRawMaterial = await insertRawMaterial(food.id!, body);
+    if (insertedRawMaterial != null) {
       Navigator.pop(context);
     }
   }

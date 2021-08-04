@@ -2,7 +2,6 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:kitprod/components/controllers.dart';
-//import 'package:kitprod/components/elevated-button-save.dart';
 import 'package:kitprod/models/building.dart';
 import 'package:kitprod/services/building-service.dart';
 
@@ -17,10 +16,7 @@ class _BuildingFormPageState extends State<BuildingFormPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Ajouter un bâtiment"),
-        actions: [],
-      ),
+      appBar: AppBar(title: Text("Ajouter un bâtiment")),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: SingleChildScrollView(
@@ -74,15 +70,15 @@ class _BuildingFormPageState extends State<BuildingFormPage> {
   }
 
   Future createBuilding(context) async {
-    Building? obj = Building(
+    Building? building = Building(
         name: buildingNameController.text.trim(),
-        space: int.tryParse(buildingSpaceController.text.trim()),
+        surface: int.tryParse(buildingSpaceController.text.trim()),
         numberOfLots: int.tryParse(buildingNumberOfLotsController.text.trim()),
-        lots: null);
-    var body = jsonEncode(obj.toJson());
+        lots: []);
+    var body = jsonEncode(building.toJson());
 
-    var obj2 = await insertBuilding(body);
-    if (obj2 != null) {
+    var insertedBuilding = await insertBuilding(body);
+    if (insertedBuilding != null) {
       Navigator.pop(context);
     }
   }

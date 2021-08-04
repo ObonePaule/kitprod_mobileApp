@@ -30,21 +30,21 @@ class _ChargeFormPageState extends State<ChargeFormPage> {
               children: <Widget>[
                 TextFormField(
                   controller: chargeAssuranceController,
-                  decoration: InputDecoration(hintText: "ASSURANCE"),
+                  decoration: InputDecoration(hintText: "Assurance"),
                 ),
                 SizedBox(
                   height: 20,
                 ),
                 TextFormField(
                   controller: chargeMecanisationController,
-                  decoration: InputDecoration(hintText: "MECANISATION"),
+                  decoration: InputDecoration(hintText: "Mécanisation"),
                 ),
                 SizedBox(
                   height: 20,
                 ),
                 TextFormField(
                   controller: chargeFraisDeGestionController,
-                  decoration: InputDecoration(hintText: "FRAIS_DE_GESTION"),
+                  decoration: InputDecoration(hintText: "Frais de gestion"),
                 ),
                 SizedBox(
                   height: 20,
@@ -52,21 +52,21 @@ class _ChargeFormPageState extends State<ChargeFormPage> {
                 TextFormField(
                   controller: chargeAnnuiteEquipementController,
                   decoration:
-                      InputDecoration(hintText: "ANNUITE_EQUIPEMENTS_AVICOLES"),
+                      InputDecoration(hintText: "Annuité équipements avicoles"),
                 ),
                 SizedBox(
                   height: 20,
                 ),
                 TextFormField(
                   controller: chargeAnnuiteBatimentController,
-                  decoration: InputDecoration(hintText: "ANNUITE_BATIMENT"),
+                  decoration: InputDecoration(hintText: "Annuité bâtiment"),
                 ),
                 SizedBox(
                   height: 20,
                 ),
                 TextFormField(
                   controller: chargeAnnuiteFafController,
-                  decoration: InputDecoration(hintText: "ANNUITE_FAF"),
+                  decoration: InputDecoration(hintText: "Annuité FAF"),
                 ),
                 SizedBox(
                   height: 20,
@@ -74,14 +74,14 @@ class _ChargeFormPageState extends State<ChargeFormPage> {
                 TextFormField(
                   controller: chargeEntretienCourantController,
                   decoration: InputDecoration(
-                      hintText: "ENTRETIEN_COURANT_PETIT_MATERIEL"),
+                      hintText: "Entretien courant et petit matériel"),
                 ),
                 SizedBox(
                   height: 20,
                 ),
                 TextFormField(
                   controller: chargeAutreController,
-                  decoration: InputDecoration(hintText: "AUTRE"),
+                  decoration: InputDecoration(hintText: "Autre"),
                 ),
                 SizedBox(
                   height: 400,

@@ -35,12 +35,6 @@ class _SignupPageState extends State<SignupPage> {
       body: SingleChildScrollView(
         child: Column(
           children: <Widget>[
-            // Image.asset(
-            //   "assets/back.jpg",
-            //   fit: BoxFit.cover,
-            //   color: Colors.grey.withOpacity(0.7),
-            //   colorBlendMode: BlendMode.darken,
-            // ),
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Card(
@@ -100,35 +94,8 @@ class _SignupPageState extends State<SignupPage> {
                           height: 30,
                         ),
                         ElevatedButton(
-                          onPressed: () async {
-                            if (_formKey.currentState!.validate()) {
-                              var name = _nameController.value.text;
-                              var email = _usernameController.value.text;
-                              var password = _passwordController.value.text;
-
-                              //Firebase auth
-                              AppUser? appUser =
-                                  await _auth.registerWithEmailAndPassword(
-                                      name, email, password);
-
-                              if (appUser == null) {
-                                setState(() {
-                                  error = 'Entrez une adresse mail valide';
-                                });
-                              } else {
-                                appUser.fullName = name;
-                                appUser.email = email;
-
-                                var body = jsonEncode(appUser.toJson());
-                                var insertedUser = await insertUser(body);
-
-                                if (insertedUser != null) {
-                                  Navigator.of(context).pushReplacement(
-                                      MaterialPageRoute(
-                                          builder: (context) => SigninPage()));
-                                }
-                              }
-                            }
+                          onPressed: () {
+                            signup();
                           },
                           child: Text("Inscription"),
                           style: ElevatedButton.styleFrom(
@@ -148,5 +115,34 @@ class _SignupPageState extends State<SignupPage> {
         ),
       ),
     );
+  }
+
+  void signup() async {
+    if (_formKey.currentState!.validate()) {
+      var name = _nameController.value.text;
+      var email = _usernameController.value.text;
+      var password = _passwordController.value.text;
+
+      //Firebase auth
+      AppUser? appUser =
+          await _auth.registerWithEmailAndPassword(name, email, password);
+
+      if (appUser == null) {
+        setState(() {
+          error = 'Entrez une adresse mail valide';
+        });
+      } else {
+        appUser.fullName = name;
+        appUser.email = email;
+
+        var body = jsonEncode(appUser.toJson());
+        var insertedUser = await insertUser(body);
+
+        if (insertedUser != null) {
+          Navigator.of(context).pushReplacement(
+              MaterialPageRoute(builder: (context) => SigninPage()));
+        }
+      }
+    }
   }
 }

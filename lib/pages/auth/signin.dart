@@ -26,12 +26,6 @@ class SigninPageState extends State<SigninPage> {
 
   @override
   void initState() {
-    // Pour mettre la page en plein écran
-    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-      statusBarColor: Colors.white,
-    ));
-    SystemChrome.setEnabledSystemUIOverlays([SystemUiOverlay.top]);
-
     super.initState();
   }
 
@@ -135,7 +129,6 @@ class SigninPageState extends State<SigninPage> {
           error = 'Entrez une adresse mail valide';
         });
       } else {
-        print(appUser);
         Navigator.of(context).pushReplacement(
             MaterialPageRoute(builder: (context) => MenuPage()));
       }

@@ -44,14 +44,13 @@ class _LotSheetListPageState extends State<LotSheetListPage> {
 
   Widget renderLotSheetsBody() {
     return FutureBuilder<List<LotSheet>>(
-      future: getLotSheetList(building.id!, lot.id!),
+      future: getLotSheetList("ghj", "lot.id!"),
       builder: (context, snapshot) {
         if (snapshot.hasData) {
           return renderLotSheetList(snapshot);
         } else if (snapshot.hasError) {
           return Text("${snapshot.error}");
         }
-        // By default, show a loading spinner.
         return CircularProgressIndicator();
       },
     );
@@ -63,7 +62,9 @@ class _LotSheetListPageState extends State<LotSheetListPage> {
         Navigator.pushNamed(context, LotSheetFormPage.routeName)
             .then((value) => setState(() {}));
       },
-      child: const Icon(Icons.add),
+      child: Column(children: [
+        const Icon(Icons.add),
+      ]),
     );
   }
 

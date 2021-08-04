@@ -17,7 +17,6 @@ import 'package:kitprod/pages/fixedtask/fixedtask-form.dart';
 import 'package:kitprod/pages/fixedtask/fixedtask-list.dart';
 import 'package:kitprod/pages/food/food-form.dart';
 import 'package:kitprod/pages/food/food-list.dart';
-import 'package:kitprod/pages/home.dart';
 import 'package:kitprod/pages/lot/lot-form.dart';
 import 'package:kitprod/pages/lot/lot-list.dart';
 import 'package:kitprod/pages/lotSheet/lotsheet-form.dart';
@@ -35,7 +34,12 @@ Future main() async {
   runApp(MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
+  @override
+  _MyAppState createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return StreamProvider<AppUser?>.value(
@@ -55,7 +59,6 @@ class MyApp extends StatelessWidget {
         routes: {
           SigninPage.routeName: (context) => SigninPage(),
           SignupPage.routeName: (context) => SignupPage(),
-          HomePage.routeName: (context) => HomePage(),
           EmployeeFormPage.routeName: (context) => EmployeeFormPage(),
           EmployeeListPage.routeName: (context) => EmployeeListPage(),
           BuildingListPage.routeName: (context) => BuildingListPage(),
