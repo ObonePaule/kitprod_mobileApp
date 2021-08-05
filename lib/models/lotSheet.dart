@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:kitprod/models/removal.dart';
 
 LotSheet lotSheetFromJson(String str) => LotSheet.fromJson(json.decode(str));
@@ -79,12 +78,12 @@ class DailyFood {
     required this.value,
   });
 
-  String type;
-  double value;
+  String? type;
+  double? value;
 
   factory DailyFood.fromJson(Map<String, dynamic> json) => DailyFood(
         type: json["type"],
-        value: json["value"].toDouble(),
+        value: json["value"],
       );
 
   Map<String, dynamic> toJson() => {

@@ -44,7 +44,7 @@ class _LotSheetListPageState extends State<LotSheetListPage> {
 
   Widget renderLotSheetsBody() {
     return FutureBuilder<List<LotSheet>>(
-      future: getLotSheetList("ghj", "lot.id!"),
+      future: getLotSheetList(building.id!, lot.id!),
       builder: (context, snapshot) {
         if (snapshot.hasData) {
           return renderLotSheetList(snapshot);
